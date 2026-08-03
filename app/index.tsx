@@ -4,12 +4,12 @@ export default function Index() {
   return (
     <View
       style={{
-        flex: 1,
+        flex: 1,                                                              
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text className="text-blue-500">Okay.</Text>
     </View>
   );
 }
