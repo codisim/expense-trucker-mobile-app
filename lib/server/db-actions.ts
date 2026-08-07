@@ -67,3 +67,17 @@ export const updateExpenseItem = async (
     return result[0];
 }
 
+
+
+export const deleteExpenseItem = async (id: string) => {
+    const result = await db
+        .delete(expenseTransaction)
+        .where(eq(expenseTransaction.id, id))
+        .returning();
+
+    if(!result.length){
+        return null;
+    }
+
+    return result[0];
+}
