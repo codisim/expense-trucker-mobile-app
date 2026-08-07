@@ -8,7 +8,13 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit pull",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:reset": "drizzle-kit reset",
+    "db:seed": "node ./drizzle/seed.ts",
+    "seed:expenses": "node ./scripts/seed.expenses.cjs"
   },
   "dependencies": {
     "@clerk/expo": "^4.1.0",
@@ -47,9 +53,13 @@
     "lightningcss": "1.30.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-class-properties": "^7.29.7",
+    "@babel/plugin-transform-private-methods": "^7.29.7",
+    "@babel/plugin-transform-private-property-in-object": "^7.29.7",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/react": "~19.1.0",
     "babel-preset-expo": "^57.0.6",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
     "postcss": "^8.5.25",

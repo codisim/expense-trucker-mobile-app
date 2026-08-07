@@ -1,48 +1,65 @@
 import { useAuth } from '@clerk/expo';
-import { Redirect } from 'expo-router';
-import { Icon, Label, NativeTabs } from 'expo-router/unstable-native-tabs';
+import { Ionicons } from '@expo/vector-icons';
+import { Redirect, Tabs } from 'expo-router';
 import { useColorScheme } from 'react-native';
-
 
 export default function TabLayout() {
   const { isSignedIn, isLoaded } = useAuth();
-  const colorSchema = useColorScheme();
+  const colorScheme = useColorScheme();
 
-  const isDark = colorSchema === 'dark';
+  const isDark = colorScheme === 'dark';
   const tabInColor = isDark ? '#c5c0ff' : '#584de0';
 
-
   if (!isLoaded) {
-    return null
+    return null;
   }
 
   if (!isSignedIn) {
-    return <Redirect href={"/(auth)/sign-in"} />
+    return <Redirect href="/(auth)/sign-in" />;
   }
 
   return (
-    <NativeTabs tintColor={tabInColor}>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: tabInColor,
+        tabBarInactiveTintColor: isDark ? '#9ca3af' : '#6b7280',
+        tabBarStyle: {
+          backgroundColor: isDark ? '#111827' : '#ffffff',
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Stats',
+          tabBarIcon: ({ color, size }) => <Ionicons name="stats-chart" size={size} color={color} />,
+        }}
+      />
 
-      <NativeTabs.Trigger>
-        <Label>Stats</Label>
-        <Icon sf={{ default: "chart.bar", selected: "chart.bar.fill" }} />
-      </NativeTabs.Trigger>
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: 'Add',
+          tabBarIcon: ({ color, size }) => <Ionicons name="add-circle-outline" size={size} color={color} />,
+        }}
+      />
 
-      <NativeTabs.Trigger>
-        <Label>Add</Label>
-        <Icon sf={{ default: "plus.circle", selected: "plus.circle.fill" }} />
-      </NativeTabs.Trigger>
+      <Tabs.Screen
+        name="expense"
+        options={{
+          title: 'Expense',
+          tabBarIcon: ({ color, size }) => <Ionicons name="card-outline" size={size} color={color} />,
+        }}
+      />
 
-      <NativeTabs.Trigger>
-        <Label>Expense</Label>
-        <Icon sf={{ default: "creditcard", selected: "creditcard.fill" }} />
-      </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger>
-        <Label>Profile</Label>
-        <Icon sf={{ default: "person", selected: "person.fill" }} />
-      </NativeTabs.Trigger>
-
-    </NativeTabs>
-  )
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+        }}
+      />
+    </Tabs>
+  );
 }
