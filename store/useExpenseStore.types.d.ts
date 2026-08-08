@@ -42,3 +42,24 @@ export type IExpenseStore = {
     getTotalExpenses: () => number;
     getTotalExpensesByCategory: (category: IExpenseCategory) => number;
 }
+
+
+export type MonthData = {
+    label: string;
+    value: number;
+    monthIndex: number;
+
+    month: string;
+    totalExpenses: number;
+    expensesByCategory: Record<IExpenseCategory, number>;
+};
+
+
+
+export type IGenericStringMap = {
+    [key: string]: string;
+}
+
+
+
+
