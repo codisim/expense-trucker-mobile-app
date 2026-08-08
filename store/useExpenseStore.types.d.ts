@@ -61,5 +61,6 @@ export type IGenericStringMap = {
 }
 
 
+type IToCamelCase = (key: string) => string;
 
 
