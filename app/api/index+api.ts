@@ -1,4 +1,4 @@
-import { updateExpenseItem } from "@/lib/server/db-actions";
+import { deleteExpenseItem, updateExpenseItem } from "@/lib/server/db-actions";
 
 
 export async function PATCH(request: Request, { id }: { id: string }) {
@@ -13,7 +13,6 @@ export async function PATCH(request: Request, { id }: { id: string }) {
             expense_date,
             amount
         })
-
 
         if(!updateExpense){
             return Response.json({
@@ -38,3 +37,38 @@ export async function PATCH(request: Request, { id }: { id: string }) {
         })
     }
 }
+
+
+
+
+export async function DELETE(_request: Request, { id }: { id: string }) {
+    try {
+        const deleteExpense = await deleteExpenseItem(id);
+
+        if(!deleteExpense){
+            return Response.json({
+                error: "item not found",
+                status: 404
+            });
+        }
+
+        return Response.json({
+            message: "Expense item deleted successfully",
+            // data: deleteExpense,
+            deleteExpense,
+            status: 200
+        });
+        
+    } catch (error) {
+        const errMessage = error instanceof Error ? error.message : "Failed to delete expense item";
+
+        return Response.json({
+            error,
+            errorMessage: errMessage,
+        })
+    }
+}
+
+
+
+
