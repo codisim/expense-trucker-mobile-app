@@ -54,8 +54,6 @@ export async function DELETE(_request: Request, { id }: { id: string }) {
 
         return Response.json({
             message: "Expense item deleted successfully",
-            // data: deleteExpense,
-            deleteExpense,
             status: 200
         });
         
